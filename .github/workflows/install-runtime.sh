@@ -22,7 +22,10 @@ helm repo add projectriff https://projectriff.storage.googleapis.com/charts/rele
 helm repo update
 
 echo "Installing Cert Manager"
-helm install projectriff/cert-manager --name cert-manager --devel --wait
+#TODO: change back to Helm after charts are updated with cert-manager v0.11.0
+#helm install projectriff/cert-manager --name cert-manager --devel --wait
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.11.0/cert-manager.yaml
+#TODO: ^^^
 sleep 5
 wait_pod_selector_ready app=cert-manager cert-manager
 wait_pod_selector_ready app=webhook cert-manager
